@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import RecipeList from './components/RecipeList';
+import RecipeDetail from './components/RecipeDetail';
+import './App.scss';
+import gsap from 'gsap';
 
-function App() {
+const App = () => {
+  React.useEffect(() => {
+    gsap.from(".recipe-list-container", { opacity: 0, y: -50, duration: 1, ease: "power2.inOut" });
+    gsap.from(".recipe-detail-container", { opacity: 0, x: 50, duration: 1, ease: "power2.inOut" });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="recipe-list-container">
+        <h1>Recipes</h1>
+        <RecipeList />
+      </div>
+      <div className="recipe-detail-container">
+        <h1>Recipe Details</h1>
+        <RecipeDetail />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
