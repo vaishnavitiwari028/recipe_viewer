@@ -1,13 +1,14 @@
+
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchRecipesByLetter,
   selectRecipe,
   toggleFavorite,
+  reorderRecipes,
 } from "../store/recipesSlice";
 import { Draggable, Droppable, DragDropContext } from "react-beautiful-dnd";
 import "./RecipeList.scss";
-import { reorderRecipes } from "../store/recipesSlice";
 import HeartOutlineIcon from "../assets/icons/heart-icon-outline.png";
 import HeartIcon from "../assets/icons/heart-icon-filled.jpg";
 import gsap from "gsap";
@@ -17,11 +18,11 @@ const RecipeList = () => {
   const favorites = useSelector((state) => state.recipes.favorites);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(fetchRecipesByLetter("c"));
-    gsap.from(".recipe-item", { opacity: 0, y: 50, scale: 0.5, rotation: -45, duration: 1, stagger: 0.1, ease: "back.out(1.7)" });
+    gsap.from(".recipe-item", { opacity: 0, y: 50, duration: 1, ease: "back.out(1.7)" });
   }, [dispatch]);
+
   const handleSelectRecipe = (recipe) => {
     dispatch(selectRecipe(recipe));
   };
